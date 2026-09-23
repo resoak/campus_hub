@@ -36,6 +36,43 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "CampusHub.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "CampusHub.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CampusHub.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CampusHub.Application.dll": {}
+        }
+      },
+      "CampusHub.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/CampusHub.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CampusHub.Domain.dll": {}
+        }
+      },
+      "CampusHub.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "CampusHub.Application": "1.0.0",
+          "CampusHub.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CampusHub.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CampusHub.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -75,10 +112,27 @@
         "microsoft.openapi.2.12.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "CampusHub.Application/1.0.0": {
+      "type": "project",
+      "path": "../CampusHub.Application/CampusHub.Application.csproj",
+      "msbuildProject": "../CampusHub.Application/CampusHub.Application.csproj"
+    },
+    "CampusHub.Domain/1.0.0": {
+      "type": "project",
+      "path": "../CampusHub.Domain/CampusHub.Domain.csproj",
+      "msbuildProject": "../CampusHub.Domain/CampusHub.Domain.csproj"
+    },
+    "CampusHub.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../CampusHub.Infrastructure/CampusHub.Infrastructure.csproj",
+      "msbuildProject": "../CampusHub.Infrastructure/CampusHub.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "CampusHub.Application >= 1.0.0",
+      "CampusHub.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.12"
     ]
   },
@@ -115,7 +169,14 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
+              "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj"
+            },
+            "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

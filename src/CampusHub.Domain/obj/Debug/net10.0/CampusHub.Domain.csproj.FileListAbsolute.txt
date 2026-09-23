@@ -1,0 +1,12 @@
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.deps.json
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.AssemblyInfoInputs.cache
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.AssemblyInfo.cs
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.csproj.CoreCompileInputs.cache
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.sourcelink.json
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\refint\CampusHub.Domain.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Domain\obj\Debug\net10.0\ref\CampusHub.Domain.dll

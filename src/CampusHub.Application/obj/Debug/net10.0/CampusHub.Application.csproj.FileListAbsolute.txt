@@ -1,0 +1,16 @@
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\bin\Debug\net10.0\CampusHub.Application.deps.json
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\bin\Debug\net10.0\CampusHub.Application.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\bin\Debug\net10.0\CampusHub.Application.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\bin\Debug\net10.0\CampusHub.Domain.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\bin\Debug\net10.0\CampusHub.Domain.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.csproj.AssemblyReference.cache
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.AssemblyInfoInputs.cache
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.AssemblyInfo.cs
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.csproj.CoreCompileInputs.cache
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.sourcelink.json
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHu.217ACA20.Up2Date
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\refint\CampusHub.Application.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\CampusHub.Application.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Application\obj\Debug\net10.0\ref\CampusHub.Application.dll

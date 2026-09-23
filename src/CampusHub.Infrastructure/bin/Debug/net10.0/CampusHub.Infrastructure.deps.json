@@ -1,0 +1,56 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "CampusHub.Infrastructure/1.0.0": {
+        "dependencies": {
+          "CampusHub.Application": "1.0.0",
+          "CampusHub.Domain": "1.0.0"
+        },
+        "runtime": {
+          "CampusHub.Infrastructure.dll": {}
+        }
+      },
+      "CampusHub.Application/1.0.0": {
+        "dependencies": {
+          "CampusHub.Domain": "1.0.0"
+        },
+        "runtime": {
+          "CampusHub.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "CampusHub.Domain/1.0.0": {
+        "runtime": {
+          "CampusHub.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CampusHub.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CampusHub.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CampusHub.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

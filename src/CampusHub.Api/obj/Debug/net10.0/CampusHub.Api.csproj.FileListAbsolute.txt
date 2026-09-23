@@ -32,3 +32,9 @@ C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\obj\Debug\net10.0\refint\Campus
 C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\obj\Debug\net10.0\CampusHub.Api.pdb
 C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\obj\Debug\net10.0\CampusHub.Api.genruntimeconfig.cache
 C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\obj\Debug\net10.0\ref\CampusHub.Api.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Application.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Domain.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Infrastructure.dll
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Application.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Infrastructure.pdb
+C:\Users\RS\Desktop\campus_hub\src\CampusHub.Api\bin\Debug\net10.0\CampusHub.Domain.pdb
