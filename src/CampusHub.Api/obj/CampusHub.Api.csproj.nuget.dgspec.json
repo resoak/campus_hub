@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Api\\CampusHub.Api.csproj": {}
+    "C:\\cshopexam\\src\\CampusHub.Api\\CampusHub.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Api\\CampusHub.Api.csproj": {
+    "C:\\cshopexam\\src\\CampusHub.Api\\CampusHub.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Api\\CampusHub.Api.csproj",
+        "projectUniqueName": "C:\\cshopexam\\src\\CampusHub.Api\\CampusHub.Api.csproj",
         "projectName": "CampusHub.Api",
-        "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Api\\CampusHub.Api.csproj",
-        "packagesPath": "C:\\Users\\RS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Api\\obj\\",
+        "projectPath": "C:\\cshopexam\\src\\CampusHub.Api\\CampusHub.Api.csproj",
+        "packagesPath": "C:\\Users\\elite\\.nuget\\packages\\",
+        "outputPath": "C:\\cshopexam\\src\\CampusHub.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -34,11 +34,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
-                "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj"
+              "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
+                "projectPath": "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj"
               },
-              "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj"
+              "C:\\cshopexam\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj": {
+                "projectPath": "C:\\cshopexam\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj"
               }
             }
           }
@@ -60,9 +60,17 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[10.0.12, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.2.3, )"
             }
           },
           "imports": [
@@ -502,20 +510,20 @@
         }
       }
     },
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
+    "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj",
+        "projectUniqueName": "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj",
         "projectName": "CampusHub.Application",
-        "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj",
-        "packagesPath": "C:\\Users\\RS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\obj\\",
+        "projectPath": "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj",
+        "packagesPath": "C:\\Users\\elite\\.nuget\\packages\\",
+        "outputPath": "C:\\cshopexam\\src\\CampusHub.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -532,8 +540,8 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
-                "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj"
+              "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
+                "projectPath": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj"
               }
             }
           }
@@ -848,20 +856,20 @@
         }
       }
     },
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
+    "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
+        "projectUniqueName": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
         "projectName": "CampusHub.Domain",
-        "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
-        "packagesPath": "C:\\Users\\RS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\obj\\",
+        "projectPath": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
+        "packagesPath": "C:\\Users\\elite\\.nuget\\packages\\",
+        "outputPath": "C:\\cshopexam\\src\\CampusHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -896,6 +904,16 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -1190,20 +1208,20 @@
         }
       }
     },
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj": {
+    "C:\\cshopexam\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj",
+        "projectUniqueName": "C:\\cshopexam\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj",
         "projectName": "CampusHub.Infrastructure",
-        "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\RS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Infrastructure\\obj\\",
+        "projectPath": "C:\\cshopexam\\src\\CampusHub.Infrastructure\\CampusHub.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\elite\\.nuget\\packages\\",
+        "outputPath": "C:\\cshopexam\\src\\CampusHub.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -1220,11 +1238,11 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
-                "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Application\\CampusHub.Application.csproj"
+              "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj": {
+                "projectPath": "C:\\cshopexam\\src\\CampusHub.Application\\CampusHub.Application.csproj"
               },
-              "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
-                "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj"
+              "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
+                "projectPath": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj"
               }
             }
           }
@@ -1245,6 +1263,38 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

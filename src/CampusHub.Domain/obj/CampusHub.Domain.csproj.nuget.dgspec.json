@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {}
+    "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
+    "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
+        "projectUniqueName": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
         "projectName": "CampusHub.Domain",
-        "projectPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
-        "packagesPath": "C:\\Users\\RS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RS\\Desktop\\campus_hub\\src\\CampusHub.Domain\\obj\\",
+        "projectPath": "C:\\cshopexam\\src\\CampusHub.Domain\\CampusHub.Domain.csproj",
+        "packagesPath": "C:\\Users\\elite\\.nuget\\packages\\",
+        "outputPath": "C:\\cshopexam\\src\\CampusHub.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elite\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -52,6 +52,16 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            },
+            "Microsoft.Extensions.Identity.Core": {
+              "target": "Package",
+              "version": "[10.0.12, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
