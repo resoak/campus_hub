@@ -2,7 +2,7 @@ import { Link, useLocation, NavLink } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { Button } from '../ui/Button';
 import { Avatar } from '../ui/Avatar';
-import { Menu, X, Bell, User, LogOut, Settings, MessageSquare, Bookmark } from 'lucide-react';
+import { Menu, X, User, LogOut, Settings, MessageSquare, Bookmark, Search } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '../../utils/helpers';
 

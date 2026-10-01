@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MessageSquare, Github, Twitter, Mail } from 'lucide-react';
+import { MessageSquare, Mail } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -54,10 +54,10 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="GitHub">
-                <Github className="h-5 w-5" />
+                GitHub
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
+                Twitter
               </a>
               <a href="mailto:contact@campushub.example" className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" aria-label="Email">
                 <Mail className="h-5 w-5" />
