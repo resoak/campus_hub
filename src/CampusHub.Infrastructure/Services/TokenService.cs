@@ -7,6 +7,7 @@ using CampusHub.Domain.Entities;
 
 namespace CampusHub.Infrastructure.Services;
 
+// JWT 設定 — 從 appsettings 讀取
 public class JwtSettings
 {
     public string SecretKey { get; set; } = string.Empty;

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CampusHub.Infrastructure.Services;
 
+// 認證服務 — 處理用戶註冊、登入、token 生命週期
 public interface IAuthService
 {
     Task<AuthResult> RegisterAsync(string username, string email, string password);

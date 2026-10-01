@@ -1,3 +1,6 @@
+/**
+ * HTTP 客戶端 — 封裝 axios，自動處理 token 附加與 401 刷新
+ */
 import axios, { AxiosError } from 'axios';
 import type { AxiosRequestConfig } from 'axios';
 import type { ApiError, AuthTokens, LoginRequest, RegisterRequest } from '../types';
