@@ -8,6 +8,7 @@ using CampusHub.Infrastructure.Configurations;
 
 namespace CampusHub.Infrastructure.Data;
 
+// EF Core DbContext — 對應 SQLite 資料庫，含 Identity 與種子資料
 public class CampusHubDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IApplicationDbContext
 {
     public CampusHubDbContext(DbContextOptions<CampusHubDbContext> options) : base(options)

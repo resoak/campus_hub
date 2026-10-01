@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampusHub.Api.Controllers.Api;
 
+// 認證 API — 處理登入、註冊、token 刷新、登出
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase

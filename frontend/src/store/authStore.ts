@@ -1,3 +1,6 @@
+/**
+ * 認證狀態管理 — 使用 Zustand + persist 持久化
+ */
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User, AuthTokens } from '../types';

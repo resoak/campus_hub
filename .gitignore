@@ -1,3 +1,23 @@
+# Local tools
 .opencode/
-.omc/
 .serena/
+.sisyphus/
+.playwright-mcp/
+
+# .NET build artifacts
+**/bin/
+**/obj/
+*.user
+
+# Test results
+[Tt]est[Rr]esults/
+*.trx
+
+# IDE
+.vs/
+.idea/
+*.suo
+
+# OS
+Thumbs.db
+.DS_Store

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampusHub.Api.Controllers.Api;
 
+// 文章 API — 文章 CRUD、按讚、留言
 [ApiController]
 [Route("api/[controller]")]
 public class PostsController : ControllerBase
