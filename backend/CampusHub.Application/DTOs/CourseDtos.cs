@@ -38,6 +38,16 @@ public class AddMemberRequest
     [Required] public string Role { get; set; } = "Member";
 }
 
+public class JoinCourseRequest
+{
+    [Required][StringLength(50)] public string Code { get; set; } = string.Empty;
+}
+
+public class UpdateMemberRoleRequest
+{
+    [Required] public string Role { get; set; } = string.Empty;
+}
+
 public class NoteDto
 {
     public Guid Id { get; set; }

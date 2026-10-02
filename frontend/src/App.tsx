@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
 import { MainLayout } from './components/layout/MainLayout';
 import { HomePage } from './pages/HomePage';
@@ -10,6 +10,8 @@ import { RegisterPage } from './pages/RegisterPage';
 import { SearchPage } from './pages/SearchPage';
 import { CategoriesPage } from './pages/CategoriesPage';
 import { TagsPage } from './pages/TagsPage';
+import { CoursesPage } from './pages/CoursesPage';
+import { CourseDetailPage } from './pages/CourseDetailPage';
 
 function PublicLayout() {
   return (
@@ -19,13 +21,18 @@ function PublicLayout() {
   );
 }
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, checkAuth } = useAuthStore();
+function ProtectedRoute() {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+}
 
-  // In a real app, you'd want to check auth on mount
-  // For now, we'll rely on the pages themselves to check auth
-
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+function PlaceholderPage({ title }: { title: string }) {
+  return (
+    <div className="mx-auto max-w-2xl py-8 text-center">
+      <h1 className="text-2xl font-bold">{title}</h1>
+      <p className="mt-4 text-gray-500">功能開發中...</p>
+    </div>
+  );
 }
 
 function App() {
@@ -42,44 +49,17 @@ function App() {
           <Route path="posts/:id" element={<PostDetailPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="courses" element={<CoursesPage />} />
+            <Route path="courses/:id" element={<CourseDetailPage />} />
+            <Route path="posts/new" element={<CreatePostPage />} />
+            <Route path="posts/:id/edit" element={<EditPostPage />} />
+            <Route path="profile" element={<PlaceholderPage title="個人檔案" />} />
+            <Route path="my-posts" element={<PlaceholderPage title="我的文章" />} />
+            <Route path="settings" element={<PlaceholderPage title="設定" />} />
+          </Route>
         </Route>
-
-        <Route path="/posts/new" element={
-          <PublicLayout>
-            <CreatePostPage />
-          </PublicLayout>
-        } />
-        <Route path="/posts/:id/edit" element={
-          <PublicLayout>
-            <EditPostPage />
-          </PublicLayout>
-        } />
-
-        {/* Protected routes - handled by page components */}
-        <Route path="/profile" element={
-          <PublicLayout>
-            <div className="max-w-2xl mx-auto py-8 text-center">
-              <h1 className="text-2xl font-bold">個人檔案</h1>
-              <p className="mt-4 text-gray-500">功能開發中...</p>
-            </div>
-          </PublicLayout>
-        } />
-        <Route path="/my-posts" element={
-          <PublicLayout>
-            <div className="max-w-2xl mx-auto py-8 text-center">
-              <h1 className="text-2xl font-bold">我的文章</h1>
-              <p className="mt-4 text-gray-500">功能開發中...</p>
-            </div>
-          </PublicLayout>
-        } />
-        <Route path="/settings" element={
-          <PublicLayout>
-            <div className="max-w-2xl mx-auto py-8 text-center">
-              <h1 className="text-2xl font-bold">設定</h1>
-              <p className="mt-4 text-gray-500">功能開發中...</p>
-            </div>
-          </PublicLayout>
-        } />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

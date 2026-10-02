@@ -44,6 +44,12 @@ User
 
 ## 2. 課程管理
 
+### 實作狀態
+
+- Backend：✅ 完成
+- Frontend：✅ 基本流程完成（列表、建立、Code 加入、查看、修改）
+- 驗證：CourseService 相關測試 5 passed；Vite production bundle 成功
+
 ### 功能需求
 
 - 建立課程
@@ -65,6 +71,12 @@ Course
 ---
 
 ## 3. 課程成員管理
+
+### 實作狀態
+
+- Backend：✅ 完成
+- Frontend：✅ 基本流程完成（查詢、新增、移除、角色調整、TA/Member 退出）
+- 權限：Owner / TA / Member 已依後端規則限制可用操作
 
 ### 功能需求
 

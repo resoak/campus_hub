@@ -1,16 +1,20 @@
 using CampusHub.Application.DTOs;
+using CampusHub.Application.Common;
 
 namespace CampusHub.Application.Interfaces;
 
 public interface ICourseService
 {
-    Task<CourseDto> CreateAsync(Guid ownerId, CreateCourseRequest request);
-    Task<CourseDto?> GetByIdAsync(Guid id);
+    Task<ServiceResult<CourseDto>> CreateAsync(Guid ownerId, CreateCourseRequest request);
+    Task<ServiceResult<CourseDto>> GetByIdAsync(Guid id, Guid userId);
     Task<CourseDto[]> GetByUserAsync(Guid userId);
-    Task<CourseDto?> UpdateAsync(Guid courseId, Guid userId, UpdateCourseRequest request);
-    Task<bool> AddMemberAsync(Guid courseId, Guid operatorId, AddMemberRequest request);
-    Task<bool> RemoveMemberAsync(Guid courseId, Guid operatorId, Guid userId);
-    Task<CourseMemberDto[]> GetMembersAsync(Guid courseId);
+    Task<ServiceResult<CourseDto>> UpdateAsync(Guid courseId, Guid userId, UpdateCourseRequest request);
+    Task<ServiceResult> JoinAsync(Guid userId, JoinCourseRequest request);
+    Task<ServiceResult> AddMemberAsync(Guid courseId, Guid operatorId, AddMemberRequest request);
+    Task<ServiceResult> UpdateMemberRoleAsync(Guid courseId, Guid operatorId, Guid userId, UpdateMemberRoleRequest request);
+    Task<ServiceResult> RemoveMemberAsync(Guid courseId, Guid operatorId, Guid userId);
+    Task<ServiceResult> LeaveAsync(Guid courseId, Guid userId);
+    Task<ServiceResult<CourseMemberDto[]>> GetMembersAsync(Guid courseId, Guid userId);
 }
 
 public interface INoteService
