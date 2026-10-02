@@ -1,47 +1,50 @@
 # CampusHub
 
-校園論壇/部落格平台 — 用戶可發布文章、留言、按讚，支援分類與標籤系統。
+課程協作平台 — 課程、筆記、討論、任務，JWT 認證，SQL Server。
 
 ## 技術棧
 
 | 層 | 技術 |
 |---|---|
-| 後端 | ASP.NET Core + EF Core + SQLite |
+| 後端 | ASP.NET Core (net10.0) + EF Core Code First + SQL Server 2022 |
 | 前端 | React 18 + TypeScript + Vite + Zustand |
 | 認證 | JWT + ASP.NET Identity |
-| 測試 | xUnit |
+| DB | Docker `campushub-sqlserver`，port 1433 |
 
 ## 專案結構
 
 ```
 CampusHub/
-├── src/                          # 後端（.NET DDD 架構）
-│   ├── CampusHub.Api/            # 進入點：Controllers、Program.cs、JWT 設定
-│   ├── CampusHub.Application/    # 應用層：Services、DTOs、Interfaces
-│   ├── CampusHub.Domain/         # 領域層：Entities、Enums
-│   └── CampusHub.Infrastructure/  # 基礎設施：EF Core、Data、AuthService
-├── frontend/                     # 前端（React + Vite）
-│   └── src/
-│       ├── pages/                # 頁面元件（10 個）
-│       ├── components/           # 共用元件
-│       ├── store/                # Zustand 狀態管理
-│       ├── services/             # API 呼叫（api.ts）
-│       └── types/                # TypeScript 型別
-├── CampusHub.Tests/              # 測試專案
-└── ARCHITECTURE.md               # 架構文件
+├── backend/
+│   ├── CampusHub.Api/            # Controllers、Program.cs、JWT、DI
+│   ├── CampusHub.Application/    # Services、DTOs、Interfaces
+│   ├── CampusHub.Domain/         # Entities、Enums
+│   └── CampusHub.Infrastructure/ # EF Core DbContext、TokenService、AuthService
+├── frontend/                     # React + Vite
+├── database/                     # 參考 SQL schema（EF EnsureCreated 為實際來源）
+├── docker-compose.yml            # SQL Server 容器
+└── CampusHub.slnx
 ```
 
 ## 快速啟動
 
+### SQL Server
+
+```bash
+docker compose up -d
+```
+
+sa 密碼：`CampusHubDev123!`，連線字串在 `backend/CampusHub.Api/appsettings.json`。
+
 ### 後端
 
 ```bash
-cd src/CampusHub.Api
+cd backend/CampusHub.Api
 dotnet restore
 dotnet run
 ```
 
-API 監聽 `http://localhost:7001`
+啟動時 `EnsureCreated()` 自動建 schema。API 監聽 `http://localhost:7001`（見 launchSettings）。
 
 ### 前端
 
@@ -51,39 +54,37 @@ npm install
 npm run dev
 ```
 
-前端監聽 `http://localhost:5173`
-
 ## 資料模型
 
-- **User** — 用戶（IdentityUser + Avatar + Role）
-- **Post** — 文章（Title, Content, Excerpt, Category, Tags）
-- **Comment** — 留言（支援巢狀回覆）
-- **Category** — 分類（6 個預設分類）
-- **Tag** — 標籤（8 個預設標籤）
-- **Like** — 按讚（Post 或 Comment）
+- **User** — IdentityUser + Name + CreatedAt + CourseMemberships
+- **Course** — 課程（Name, Code, Description）
+- **CourseMember** — 課程成員（CourseId+UserId 複合 PK, Role: Owner/TA/Member）
+- **Note** — 課程筆記（Title, Content, AuthorId）
+- **Post** — 討論文（Title, Content, AuthorId, Comments）
+- **Comment** — 留言（PostId, AuthorId, Content）
+- **TaskItem** — 任務（Title, Description, Status: Todo/Doing/Done, AssigneeId, DueDate，表名 `Tasks`）
 - **RefreshToken** — JWT 刷新令牌
 
 ## API 端點
 
 | Controller | 用途 |
 |---|---|
-| AuthController | 登入/註冊/刷新 token/登出 |
-| PostsController | 文章 CRUD + 按讚 + 留言 |
-| CommentsController | 留言管理 |
-| CategoriesController | 分類管理 |
-| TagsController | 標籤管理 |
-| SearchController | 搜尋 |
+| AuthController | 註冊/登入/刷新 token/登出（匿名） |
+| CoursesController | 課程 CRUD、成員管理（需登入） |
+| NotesController | 筆記 CRUD（需登入） |
+| PostsController | 討論文 CRUD（需登入） |
+| CommentsController | 留言（需登入） |
+| TasksController | 任務 CRUD（需登入） |
 
 ## 認證流程
 
-1. 用戶登入 → 核發 JWT access token + refresh token
-2. Access token 存放於 HttpOnly cookie
-3. 請求時從 cookie 或 Authorization header 讀取 token
-4. Token 過期時用 refresh token 換新（前端 axios 攔截器自動處理）
+1. 登入 → JWT access token + refresh token（HttpOnly cookie）
+2. 請求帶 `Authorization: Bearer <token>` 或 cookie
+3. Token 過期用 refresh token 換新
 
 ## 開發規範
 
 - 註解使用繁體中文，只寫「為什麼」不寫「是什麼」
 - 每個檔案頂部用 1-2 行說明用途
 - 複雜邏輯必須有註解解釋原因
-- 詳細規則見 `.sisyphus/RULES.md`
+- Schema 由 EF Core Code First 管理，`database/*.sql` 僅供參考
