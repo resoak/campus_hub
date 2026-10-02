@@ -209,3 +209,51 @@ export const searchService = {
 };
 
 export default api;
+export const courseService = {
+  getMine: async () => {
+    const response = await api.get<import('../types').Course[]>('/courses/mine');
+    return response.data;
+  },
+
+  getById: async (id: string) => {
+    const response = await api.get<import('../types').Course>(`/courses/${id}`);
+    return response.data;
+  },
+
+  create: async (data: import('../types').CreateCourseRequest) => {
+    const response = await api.post<import('../types').Course>('/courses', data);
+    return response.data;
+  },
+
+  update: async (id: string, data: import('../types').UpdateCourseRequest) => {
+    const response = await api.put<import('../types').Course>(`/courses/${id}`, data);
+    return response.data;
+  },
+  join: async (data: import('../types').JoinCourseRequest) => {
+    await api.post('/courses/join', data);
+  },
+
+  getMembers: async (courseId: string) => {
+    const response = await api.get<import('../types').CourseMember[]>(`/courses/${courseId}/members`);
+    return response.data;
+  },
+
+  addMember: async (courseId: string, data: import('../types').AddCourseMemberRequest) => {
+    await api.post(`/courses/${courseId}/members`, data);
+  },
+
+  updateMemberRole: async (
+    courseId: string,
+    memberId: string,
+    data: import('../types').UpdateCourseMemberRoleRequest
+  ) => {
+    await api.patch(`/courses/${courseId}/members/${memberId}/role`, data);
+  },
+  removeMember: async (courseId: string, memberId: string) => {
+    await api.delete(`/courses/${courseId}/members/${memberId}`);
+  },
+
+  leave: async (courseId: string) => {
+    await api.delete(`/courses/${courseId}/members/me`);
+  },
+};

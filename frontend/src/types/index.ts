@@ -120,3 +120,42 @@ export interface ApiError {
   statusCode: number;
   errors?: Record<string, string[]>;
 }
+export interface Course {
+  id: string;
+  name: string;
+  code: string;
+  description?: string | null;
+}
+
+export type CourseRole = 'Owner' | 'TA' | 'Member';
+
+export interface CourseMember {
+  userId: string;
+  name: string;
+  email: string;
+  role: CourseRole;
+  joinedAt: string;
+}
+
+export interface CreateCourseRequest {
+  name: string;
+  code: string;
+  description?: string;
+}
+
+export interface UpdateCourseRequest {
+  name?: string;
+  description?: string;
+}
+export interface JoinCourseRequest {
+  code: string;
+}
+
+export interface AddCourseMemberRequest {
+  userId: string;
+  role: 'TA' | 'Member';
+}
+
+export interface UpdateCourseMemberRoleRequest {
+  role: 'TA' | 'Member';
+}

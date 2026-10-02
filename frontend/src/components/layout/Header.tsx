@@ -25,6 +25,7 @@ export function Header() {
 
   const navLinks = [
     { path: '/', label: '首頁' },
+    { path: '/courses', label: '課程' },
     { path: '/categories', label: '分類' },
     { path: '/tags', label: '標籤' },
     { path: '/search', label: '搜尋' },
