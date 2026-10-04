@@ -22,7 +22,7 @@ CampusHub/
 │   ├── CampusHub.Domain/         # Entities、Enums
 │   └── CampusHub.Infrastructure/ # EF Core DbContext、TokenService、AuthService
 ├── frontend/                     # React + Vite；課程/成員前端已對接新 API
-├── database/                     # 參考 SQL schema（EF EnsureCreated 為實際來源）
+├── database/                     # SQL Server 首次啟動使用的 schema
 ├── docker-compose.yml            # SQL Server 容器
 └── CampusHub.slnx
 ```
@@ -35,7 +35,14 @@ CampusHub/
 docker compose up -d
 ```
 
-sa 密碼：`CampusHubDev123!`，連線字串在 `backend/CampusHub.Api/appsettings.json`。
+容器首次建立 `CampusHub` 資料庫時會執行 `database/CampusHub_CreateDatabase.sql`。sa 密碼：`CampusHubDev123!`，連線字串在 `backend/CampusHub.Api/appsettings.json`。
+
+若既有 Docker volume 已包含資料庫，需明確刪除資料後重建，初始化 SQL 才會重新執行：
+
+```bash
+docker compose down -v
+docker compose up -d
+```
 
 ### 後端
 

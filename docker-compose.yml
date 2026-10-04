@@ -8,6 +8,19 @@ services:
       MSSQL_PID: Developer
     ports:
       - "1433:1433"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /opt/mssql/bin/sqlservr &
+        server_pid=$$!
+        until /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" -b -o /dev/null; do
+          sleep 2
+        done
+        if ! /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -Q "SET NOCOUNT ON; SELECT DB_ID('CampusHub')" -h -1 -W | grep -q '[0-9]'; then
+          /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$$MSSQL_SA_PASSWORD" -C -i /scripts/CampusHub_CreateDatabase.sql -b
+        fi
+        wait $$server_pid
     volumes:
       - campushub-sqlserver-data:/var/opt/mssql
       - ./database:/scripts:ro

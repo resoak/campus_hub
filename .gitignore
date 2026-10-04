@@ -3,6 +3,7 @@
 .serena/
 .sisyphus/
 .playwright-mcp/
+.docs/
 
 # .NET build artifacts
 **/bin/
