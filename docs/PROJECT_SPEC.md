@@ -14,7 +14,7 @@
 Frontend → Axios `courseService` → CoursesController → ICourseService → IApplicationDbContext(EF) → SQL Server。EnsureCreated 啟動建 14 表；JWT access token 由 Axios interceptor 附加。
 
 ## 關鍵決策
-- Schema 以 EF Core Code First 為準；`database/*.sql` 僅參考
+- Docker 首次建立 `CampusHub` 資料庫時執行 `database/CampusHub_CreateDatabase.sql`；既有 volume 不重複初始化
 - TaskItem 類別名避開 System.Threading.Tasks.Task 衝突，表名 `Tasks`
 - CourseMember 複合 PK (CourseId, UserId)
 - 課程 Code 去除頭尾空白並轉大寫；學生輸入 Code 後直接加入，不經審核
