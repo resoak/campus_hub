@@ -20,7 +20,7 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<AuthResponse>> Register([FromBody] RegisterRequest request)
     {
-        var result = await _authService.RegisterAsync(request.Username, request.Email, request.Password, request.Name);
+        var result = await _authService.RegisterAsync(request.Email, request.Password, request.Name);
         
         if (!result.Succeeded)
         {
@@ -41,7 +41,6 @@ public class AuthController : ControllerBase
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
-                Username = result.User.UserName!,
                 Email = result.User.Email!,
                 Name = result.User.Name,
                 CreatedAt = result.User.CreatedAt,
@@ -73,7 +72,6 @@ public class AuthController : ControllerBase
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
-                Username = result.User.UserName!,
                 Email = result.User.Email!,
                 Name = result.User.Name,
                 CreatedAt = result.User.CreatedAt,
@@ -121,7 +119,6 @@ public class AuthController : ControllerBase
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
-                Username = result.User.UserName!,
                 Email = result.User.Email!,
                 Name = result.User.Name,
                 CreatedAt = result.User.CreatedAt,
@@ -165,7 +162,6 @@ public class AuthController : ControllerBase
         return Ok(new UserDto
         {
             Id = user.Id,
-            Username = user.UserName!,
             Email = user.Email!,
             Name = user.Name,
             CreatedAt = user.CreatedAt,

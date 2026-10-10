@@ -1,11 +1,12 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace CampusHub.Domain.Entities;
 
-// 使用者 — JWT 登入；Identity 已內建 Email/PasswordHash/CreatedAt 以外欄位
-public class User : IdentityUser<Guid>
+// 使用者：對應既有 dbo.Users，不使用 Identity 的額外欄位。
+public class User
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string PasswordHash { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();

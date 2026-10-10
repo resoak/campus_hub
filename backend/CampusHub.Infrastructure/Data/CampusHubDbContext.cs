@@ -1,13 +1,11 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CampusHub.Application.Interfaces;
 using CampusHub.Domain.Entities;
 
 namespace CampusHub.Infrastructure.Data;
 
-// EF Core DbContext — 對應 SQL Server，含 Identity
-public class CampusHubDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IApplicationDbContext
+// 使用一般 DbContext，對應既有 SQL Server 業務資料表。
+public class CampusHubDbContext : DbContext, IApplicationDbContext
 {
     public CampusHubDbContext(DbContextOptions<CampusHubDbContext> options) : base(options)
     {

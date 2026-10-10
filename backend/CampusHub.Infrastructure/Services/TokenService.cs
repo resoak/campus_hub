@@ -39,7 +39,7 @@ public class TokenService : ITokenService
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email!),
-            new(ClaimTypes.Name, user.UserName!),
+            new(ClaimTypes.Name, user.Name),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 

@@ -111,7 +111,6 @@ public sealed class CourseServiceTests : IDisposable // 驗證課程加入與成
         {
             Id = Guid.NewGuid(),
             Name = name,
-            UserName = email,
             Email = email
         };
         _context.Users.Add(user);

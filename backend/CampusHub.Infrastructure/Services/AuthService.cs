@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CampusHub.Infrastructure.Services;
 
-// 認證服務 — 處理用戶註冊、登入、token 生命週期
+// 使用 Email 登入；保留 Identity 密碼雜湊演算法，不依賴 Identity 資料表。
 public interface IAuthService
 {
-    Task<AuthResult> RegisterAsync(string username, string email, string password, string name);
+    Task<AuthResult> RegisterAsync(string email, string password, string name);
     Task<AuthResult> LoginAsync(string email, string password);
     Task<AuthResult> RefreshTokenAsync(string refreshToken);
     Task<bool> RevokeRefreshTokenAsync(string refreshToken);
@@ -26,96 +26,68 @@ public class AuthResult
 
 public class AuthService : IAuthService
 {
-    private readonly UserManager<User> _userManager;
+    private readonly IPasswordHasher<User> _passwordHasher;
     private readonly CampusHubDbContext _context;
     private readonly ITokenService _tokenService;
 
-    public AuthService(
-        UserManager<User> userManager,
-        CampusHubDbContext context,
-        ITokenService tokenService)
+    public AuthService(IPasswordHasher<User> passwordHasher, CampusHubDbContext context, ITokenService tokenService)
     {
-        _userManager = userManager;
+        _passwordHasher = passwordHasher;
         _context = context;
         _tokenService = tokenService;
     }
 
-    public async Task<AuthResult> RegisterAsync(string username, string email, string password, string name)
+    public async Task<AuthResult> RegisterAsync(string email, string password, string name)
     {
-        var existingUser = await _userManager.FindByEmailAsync(email);
-        if (existingUser != null)
-        {
-            return new AuthResult { Succeeded = false, Errors = new[] { "此電子郵件已被註冊" } };
-        }
+        email = email.Trim();
+        name = name.Trim();
 
-        existingUser = await _userManager.FindByNameAsync(username);
-        if (existingUser != null)
-        {
-            return new AuthResult { Succeeded = false, Errors = new[] { "此用戶名已被使用" } };
-        }
+        if (await _context.Users.AnyAsync(u => u.Email == email))
+            return new AuthResult { Errors = ["此電子郵件已被註冊"] };
 
-        var user = new User
-        {
-            UserName = username,
-            Email = email,
-            Name = name,
-        };
+        // 維持原先密碼政策：8 字以上，需有大小寫英文字母與數字。
+        if (password.Length < 8 || !password.Any(char.IsUpper) ||
+            !password.Any(char.IsLower) || !password.Any(char.IsDigit))
+            return new AuthResult { Errors = ["密碼至少 8 字元，且須包含大寫、小寫英文字母及數字"] };
 
-        var result = await _userManager.CreateAsync(user, password);
-        if (!result.Succeeded)
-        {
-            return new AuthResult { Succeeded = false, Errors = result.Errors.Select(e => e.Description).ToArray() };
-        }
+        var user = new User { Email = email, Name = name };
+        user.PasswordHash = _passwordHasher.HashPassword(user, password);
 
-        var accessToken = _tokenService.GenerateAccessToken(user);
-        var refreshToken = _tokenService.GenerateRefreshToken();
-
-        var refreshTokenEntity = new RefreshToken
-        {
-            Token = refreshToken,
-            UserId = user.Id,
-            ExpiresAt = DateTime.UtcNow.AddDays(7),
-        };
-
-        _context.RefreshTokens.Add(refreshTokenEntity);
+        _context.Users.Add(user);
+        var result = CreateTokens(user);
         await _context.SaveChangesAsync();
-
-        return new AuthResult
-        {
-            Succeeded = true,
-            AccessToken = accessToken,
-            RefreshToken = refreshToken,
-            User = user,
-        };
+        return result;
     }
 
     public async Task<AuthResult> LoginAsync(string email, string password)
     {
-        var user = await _userManager.FindByEmailAsync(email);
-        if (user == null)
-        {
-            return new AuthResult { Succeeded = false, Errors = new[] { "電子郵件或密碼錯誤" } };
-        }
+        email = email.Trim();
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user is null)
+            return new AuthResult { Errors = ["電子郵件或密碼錯誤"] };
 
-        var isValid = await _userManager.CheckPasswordAsync(user, password);
-        if (!isValid)
-        {
-            return new AuthResult { Succeeded = false, Errors = new[] { "電子郵件或密碼錯誤" } };
-        }
+        var verification = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
+        if (verification == PasswordVerificationResult.Failed)
+            return new AuthResult { Errors = ["電子郵件或密碼錯誤"] };
 
+        if (verification == PasswordVerificationResult.SuccessRehashNeeded)
+            user.PasswordHash = _passwordHasher.HashPassword(user, password);
+
+        var result = CreateTokens(user);
+        await _context.SaveChangesAsync();
+        return result;
+    }
+
+    private AuthResult CreateTokens(User user)
+    {
         var accessToken = _tokenService.GenerateAccessToken(user);
         var refreshToken = _tokenService.GenerateRefreshToken();
-
-        var refreshTokenEntity = new RefreshToken
+        _context.RefreshTokens.Add(new RefreshToken
         {
             Token = refreshToken,
-            UserId = user.Id,
+            User = user,
             ExpiresAt = DateTime.UtcNow.AddDays(7),
-        };
-
-        _context.RefreshTokens.Add(refreshTokenEntity);
-        await _context.SaveChangesAsync();
-
+        });
         return new AuthResult
         {
             Succeeded = true,
@@ -131,54 +103,27 @@ public class AuthService : IAuthService
             .Include(rt => rt.User)
             .FirstOrDefaultAsync(rt => rt.Token == refreshToken && !rt.IsRevoked && rt.ExpiresAt > DateTime.UtcNow);
 
-        if (storedToken == null)
-        {
-            return new AuthResult { Succeeded = false, Errors = new[] { "無效或已過期的重新整理權杖" } };
-        }
+        if (storedToken is null)
+            return new AuthResult { Errors = ["無效或已過期的重新整理權杖"] };
 
-        // Revoke old refresh token
         storedToken.IsRevoked = true;
-
-        // Generate new tokens
-        var newAccessToken = _tokenService.GenerateAccessToken(storedToken.User);
-        var newRefreshToken = _tokenService.GenerateRefreshToken();
-
-        var newRefreshTokenEntity = new RefreshToken
-        {
-            Token = newRefreshToken,
-            UserId = storedToken.UserId,
-            ExpiresAt = DateTime.UtcNow.AddDays(7),
-        };
-
-        _context.RefreshTokens.Add(newRefreshTokenEntity);
+        var result = CreateTokens(storedToken.User);
         await _context.SaveChangesAsync();
-
-        return new AuthResult
-        {
-            Succeeded = true,
-            AccessToken = newAccessToken,
-            RefreshToken = newRefreshToken,
-            User = storedToken.User,
-        };
+        return result;
     }
 
     public async Task<bool> RevokeRefreshTokenAsync(string refreshToken)
     {
         var storedToken = await _context.RefreshTokens
             .FirstOrDefaultAsync(rt => rt.Token == refreshToken && !rt.IsRevoked);
-
-        if (storedToken == null)
-        {
+        if (storedToken is null)
             return false;
-        }
 
         storedToken.IsRevoked = true;
         await _context.SaveChangesAsync();
         return true;
     }
 
-    public async Task<User?> GetUserByIdAsync(Guid userId)
-    {
-        return await _userManager.FindByIdAsync(userId.ToString());
-    }
+    public Task<User?> GetUserByIdAsync(Guid userId) =>
+        _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 }

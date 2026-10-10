@@ -5,11 +5,6 @@ namespace CampusHub.Application.DTOs;
 public class RegisterRequest
 {
     [Required]
-    [StringLength(50, MinimumLength = 2)]
-    [RegularExpression(@"^[a-zA-Z0-9_\u4e00-\u9fa5]+$", ErrorMessage = "用戶名只能包含字母、數字、底線和中文")]
-    public string Username { get; set; } = string.Empty;
-
-    [Required]
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
 
@@ -43,7 +38,6 @@ public class AuthResponse
 public class UserDto
 {
     public Guid Id { get; set; }
-    public string Username { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }

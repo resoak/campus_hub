@@ -19,19 +19,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<CampusHubDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Configure Identity
-builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
-{
-    options.Password.RequireDigit = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 8;
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedEmail = false;
-})
-    .AddEntityFrameworkStores<CampusHubDbContext>()
-    .AddDefaultTokenProviders();
+// Keep Identity password hashing without the Identity user schema.
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>()!;
