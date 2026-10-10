@@ -36,7 +36,6 @@ public class AuthResponse
 {
     public bool Succeeded { get; set; }
     public string? AccessToken { get; set; }
-    public string? RefreshToken { get; set; }
     public UserDto? User { get; set; }
     public string[] Errors { get; set; } = [];
 }
@@ -52,6 +51,5 @@ public class UserDto
 
 public class RefreshTokenRequest
 {
-    [Required]
-    public string RefreshToken { get; set; } = string.Empty;
+    public string? RefreshToken { get; set; }
 }

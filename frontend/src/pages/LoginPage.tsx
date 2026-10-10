@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -6,8 +6,7 @@ import { z } from 'zod';
 import { useAuthStore } from '../store/authStore';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
-import { Loader2, Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
-import { cn } from '../utils/helpers';
+import { Loader2, Eye, EyeOff, Mail, Lock } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email('請輸入有效的電子郵件'),
@@ -25,7 +24,10 @@ export function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  const from = (location.state as { from?: Location })?.from?.pathname || '/';
+  const returnLocation = (location.state as { from?: { pathname: string; search?: string; hash?: string } } | null)?.from;
+  const from = returnLocation
+    ? `${returnLocation.pathname}${returnLocation.search || ''}${returnLocation.hash || ''}`
+    : '/';
 
   const {
     register,

@@ -39,7 +39,8 @@ api.interceptors.response.use(
   async (error: AxiosError<ApiError>) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    const isAuthRequest = /\/auth\/(login|register|refresh)$/.test(originalRequest.url || '');
+    if (error.response?.status === 401 && !isAuthRequest && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
@@ -81,6 +82,14 @@ const clearAuth = () => {
   localStorage.removeItem('user');
 };
 
+export const userService = {
+  updateMe: async (name: string) => {
+    const response = await api.put<import('../types').User>('/users/me', { name });
+    localStorage.setItem('user', JSON.stringify(response.data));
+    return response.data;
+  },
+};
+
 export const authService = {
   login: async (data: LoginRequest) => {
     const response = await api.post<AuthTokens & { user: import('../types').User }>('/auth/login', data);
@@ -96,9 +105,14 @@ export const authService = {
     return response.data;
   },
 
+  refresh: refreshAccessToken,
+
   logout: async () => {
-    await api.post('/auth/logout');
-    clearAuth();
+    try {
+      await api.post('/auth/logout');
+    } finally {
+      clearAuth();
+    }
   },
 
   getCurrentUser: async () => {

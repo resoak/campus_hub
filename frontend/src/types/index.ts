@@ -1,9 +1,10 @@
 export interface User {
   id: string;
   username: string;
+  name: string;
   email: string;
   avatarUrl?: string;
-  role: 'student' | 'admin' | 'moderator';
+  role?: 'student' | 'admin' | 'moderator';
   createdAt: string;
 }
 
@@ -101,7 +102,6 @@ export interface CreateCommentRequest {
 
 export interface AuthTokens {
   accessToken: string;
-  refreshToken: string;
 }
 
 export interface LoginRequest {
@@ -111,6 +111,7 @@ export interface LoginRequest {
 
 export interface RegisterRequest {
   username: string;
+  name: string;
   email: string;
   password: string;
 }

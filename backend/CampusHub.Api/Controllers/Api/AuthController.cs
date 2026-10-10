@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampusHub.Api.Controllers.Api;
 
-// Ë™çË? API ???ïÁ??ªÂÖ•?ÅË®ª?ä„ÄÅtoken ?∑Êñ∞?ÅÁôª??
+// Ë™çÔøΩ? API ???ÔøΩÔøΩ??ÔøΩÂÖ•?ÔøΩË®ª?ÔøΩ„ÄÅtoken ?ÔøΩÊñ∞?ÔøΩÁôª??
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
@@ -38,7 +38,6 @@ public class AuthController : ControllerBase
         {
             Succeeded = true,
             AccessToken = result.AccessToken,
-            RefreshToken = result.RefreshToken,
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
@@ -71,7 +70,6 @@ public class AuthController : ControllerBase
         {
             Succeeded = true,
             AccessToken = result.AccessToken,
-            RefreshToken = result.RefreshToken,
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
@@ -84,17 +82,20 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("refresh")]
-    public async Task<ActionResult<AuthResponse>> RefreshToken([FromBody] RefreshTokenRequest request)
+    public async Task<ActionResult<AuthResponse>> RefreshToken([FromBody] RefreshTokenRequest? request = null)
     {
         // Try to get from body first, then from cookie
-        var refreshToken = request.RefreshToken ?? Request.Cookies["refresh_token"];
+        var bodyRefreshToken = request?.RefreshToken;
+        var refreshToken = string.IsNullOrWhiteSpace(bodyRefreshToken)
+            ? Request.Cookies["refresh_token"]
+            : bodyRefreshToken;
         
         if (string.IsNullOrEmpty(refreshToken))
         {
             return BadRequest(new AuthResponse
             {
                 Succeeded = false,
-                Errors = new[] { "Áº∫Â??çÊñ∞?¥Á?Ê¨äÊ?" },
+                Errors = new[] { "Áº∫ÔøΩ??ÔøΩÊñ∞?ÔøΩÔøΩ?Ê¨äÔøΩ?" },
             });
         }
 
@@ -117,7 +118,6 @@ public class AuthController : ControllerBase
         {
             Succeeded = true,
             AccessToken = result.AccessToken,
-            RefreshToken = result.RefreshToken,
             User = result.User != null ? new UserDto
             {
                 Id = result.User.Id,
@@ -133,7 +133,9 @@ public class AuthController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Logout([FromBody] RefreshTokenRequest? request = null)
     {
-        var refreshToken = request?.RefreshToken ?? Request.Cookies["refresh_token"];
+        var refreshToken = string.IsNullOrWhiteSpace(request?.RefreshToken)
+            ? Request.Cookies["refresh_token"]
+            : request.RefreshToken;
         
         if (!string.IsNullOrEmpty(refreshToken))
         {
@@ -141,7 +143,7 @@ public class AuthController : ControllerBase
         }
 
         ClearRefreshTokenCookie();
-        return Ok(new { message = "?ªÂá∫?êÂ?" });
+        return Ok(new { message = "?ÔøΩÂá∫?ÔøΩÔøΩ?" });
     }
 
     [HttpGet("me")]

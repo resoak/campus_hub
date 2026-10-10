@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,9 +10,10 @@ import { Loader2, Eye, EyeOff, Mail, Lock, User, CheckCircle, AlertCircle } from
 import { cn } from '../utils/helpers';
 
 const registerSchema = z.object({
-  username: z.string().min(2, '用戶名至少需要 2 個字元').max(20, '用戶名最多 20 個字元').regex(/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/, '用戶名只能包含字母、數字、底線和中文'),
+  username: z.string().min(2, '用戶名至少需要 2 個字元').max(50, '用戶名最多 50 個字元').regex(/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/, '用戶名只能包含字母、數字、底線和中文'),
+  name: z.string().trim().min(1, '請輸入姓名').max(100, '姓名最多 100 個字元'),
   email: z.string().email('請輸入有效的電子郵件'),
-  password: z.string().min(8, '密碼至少需要 8 個字元').max(50, '密碼最多 50 個字元'),
+  password: z.string().min(8, '密碼至少需要 8 個字元').max(50, '密碼最多 50 個字元').regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, '密碼需包含大小寫字母及數字'),
   confirmPassword: z.string(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: '兩次輸入的密碼不一致',
@@ -22,7 +23,7 @@ const registerSchema = z.object({
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 const passwordRequirements = [
-  { label: '至少 8 個字元', test: (p: string) => p.length >= 8 },
+  { label: '至少 8 個字元', test: (p: string) => p.length >= 8 && p.length <= 50 },
   { label: '包含大寫字母', test: (p: string) => /[A-Z]/.test(p) },
   { label: '包含小寫字母', test: (p: string) => /[a-z]/.test(p) },
   { label: '包含數字', test: (p: string) => /\d/.test(p) },
@@ -63,7 +64,7 @@ export function RegisterPage() {
     setError(null);
     setIsLoading(true);
     try {
-      await registerUser(data.username, data.email, data.password);
+      await registerUser(data.username, data.email, data.password, data.name);
       navigate('/');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : '註冊失敗，請稍後再試');
@@ -114,7 +115,16 @@ export function RegisterPage() {
           icon={<User className="h-5 w-5" />}
           {...register('username')}
           autoComplete="username"
-          maxLength={20}
+          maxLength={50}
+        />
+
+        <Input
+          label="姓名"
+          placeholder="輸入姓名"
+          error={errors.name?.message}
+          {...register('name')}
+          autoComplete="name"
+          maxLength={100}
         />
 
         <Input

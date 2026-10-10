@@ -3,7 +3,7 @@
  */
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User, AuthTokens } from '../types';
+import type { User } from '../types';
 import { authService, getAccessToken, setAccessToken } from '../services/api';
 
 interface AuthState {
@@ -12,7 +12,7 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (username: string, email: string, password: string) => Promise<void>;
+  register: (username: string, email: string, password: string, name: string) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
   clearError: () => void;
@@ -43,10 +43,10 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      register: async (username: string, email: string, password: string) => {
+      register: async (username: string, email: string, password: string, name: string) => {
         set({ isLoading: true, error: null });
         try {
-          const data = await authService.register({ username, email, password });
+          const data = await authService.register({ username, email, password, name });
           set({
             user: data.user,
             isAuthenticated: true,
@@ -71,20 +71,15 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
-        const token = getAccessToken();
-        const storedUser = localStorage.getItem('user');
-
-        if (!token || !storedUser) {
-          set({ isAuthenticated: false, user: null, isLoading: false });
-          return;
-        }
-
         set({ isLoading: true });
         try {
-          const user = JSON.parse(storedUser);
+          if (!getAccessToken()) await authService.refresh();
+          const user = await authService.getCurrentUser();
           set({ user, isAuthenticated: true, isLoading: false });
         } catch {
-          set({ isAuthenticated: false, user: null, isLoading: false });
+          setAccessToken(null);
+          localStorage.removeItem('user');
+          set({ user: null, isAuthenticated: false, isLoading: false });
         }
       },
 
