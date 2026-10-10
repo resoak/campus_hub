@@ -1,5 +1,22 @@
 # CampusHub 開發日誌
 
+## 2026-10-10｜更新完整資料庫初始化腳本
+
+### 修改內容
+- 更新 `database/CampusHub_CreateDatabase.sql`：可在全新或空白的 `CampusHub` 資料庫建立 8 張表（Users、Courses、CourseMembers、Notes、Posts、Comments、Tasks、RefreshTokens）。
+- `Users` 保留原本 `User_Id`、`Name`、`Email`、`PasswordHash`、`CreatedAt` 五欄；`Email` 保留唯一性約束。
+- 其餘業務表以目前 EF Core 實體映射為準：主鍵採 `Id`，關聯欄位採 `CourseId`、`UserId`、`AuthorId`、`PostId`、`AssigneeId`；角色及任務狀態改為整數列舉。
+- 調整任務指派的刪除動作：刪除使用者時，任務的 `AssigneeId` 設為 `NULL`。
+- 新增登入續期用的 `RefreshTokens`、必要索引，以及六個欄位的 `MS_Description`。
+- 每個資料欄位附繁體中文註解；不建立 AspNet 前綴資料表。
+- 這是全新建庫腳本，不適合直接在已有資料表的資料庫上重複執行；既有資料庫須另行規劃遷移。
+
+### 驗證與限制
+- `dotnet test CampusHub.slnx --nologo -v:q`：5 個通過，0 個失敗；2 個既有過時 API 警告。
+- `git diff --check` 通過。
+- 未將腳本送至 SQL Server 執行，尚未驗證實際建表與 API 整合；前端 Username 欄位仍待同步修改。
+- `docs/CampusHub-Requirements.md` 目前保留舊版欄位命名，未同步修改規格文件。
+
 ## 2026-10-10｜簡化使用者認證與資料庫結構
 
 ### 修改原因
