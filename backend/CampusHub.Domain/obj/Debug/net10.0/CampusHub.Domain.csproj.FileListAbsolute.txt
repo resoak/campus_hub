@@ -1,0 +1,16 @@
+C:\cshopexam\backend\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.deps.json
+C:\cshopexam\backend\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.dll
+C:\cshopexam\backend\CampusHub.Domain\bin\Debug\net10.0\CampusHub.Domain.pdb
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.csproj.AssemblyReference.cache
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.AssemblyInfoInputs.cache
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.AssemblyInfo.cs
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.csproj.CoreCompileInputs.cache
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.sourcelink.json
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.dll
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\refint\CampusHub.Domain.dll
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\CampusHub.Domain.pdb
+C:\cshopexam\backend\CampusHub.Domain\obj\Debug\net10.0\ref\CampusHub.Domain.dll
+C:\cshopexam\.build-check\Debug\net10.0\CampusHub.Domain.deps.json
+C:\cshopexam\.build-check\Debug\net10.0\CampusHub.Domain.dll
+C:\cshopexam\.build-check\Debug\net10.0\CampusHub.Domain.pdb
